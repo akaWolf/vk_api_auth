@@ -105,7 +105,6 @@ def auth(email, password, client_id, scope):
 		url = "http://oauth.vk.com/oauth/authorize?" + \
 			"redirect_uri=http://oauth.vk.com/blank.html&response_type=token&" + \
 			"client_id=%s&scope=%s&display=mobile&v=%s" % (client_id, ",".join(scope), api_version)
-		print("============ URL1: " + url)
 		response = opener.open(url)
 		doc = response.read()
 		if py3:
@@ -128,7 +127,6 @@ def auth(email, password, client_id, scope):
 		doc = response.read()
 		if py3:
 			doc = doc.decode("utf-8")
-		print("============ URL2: " + response.geturl())
 		file = open("doc2.html", "w")
 		file.write(doc)
 		file.close
@@ -151,7 +149,6 @@ def auth(email, password, client_id, scope):
 			except:
 				doc = doc.decode("windows-1251")
 		url = response.geturl()
-		print("============ URL3: " + url)
 		file = open("doc3.html", "w")
 		file.write(doc)
 		file.close
@@ -166,7 +163,6 @@ def auth(email, password, client_id, scope):
 			raise RuntimeError("Something wrong")
 		if parser.method == "POST":
 			urlp = urlparse(url)
-			print("============ URL4: " + urlp.scheme + '://' + urlp.netloc + parser.url)
 			response = opener.open(urlp.scheme + '://' + urlp.netloc + parser.url, urlencode(parser.params).encode("utf-8"))
 		else:
 			raise NotImplementedError("Method '%s'" % parser.method)
